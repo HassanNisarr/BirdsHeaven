@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Update Bird Record</title>
+
+</head>
+<body>
+
+    <h1>Update Bird Record</h1>
+    <form action = "/api/bird/update" id="updateForm" method="post">
+        <label>RingNo:</label>
+        <input type="text"  name="ringno" required ><br>
+        <h3>Fields To Update</h3>
+        <label> Specie: </label>
+        <select name="specie" id="specieDropdown">
+            <option value="">Select a specie</option>
+            <option value="Alexandrine">Alexandrine</option>
+            <option value="Ringneck">Ringneck</option>
+            <option value="Amazon">Amazon</option>
+            <option value="Lovebird">LoveBird</option>
+        </select><br>
+        <label>Mutation:</label>
+        <input type="text" id="mutation" name="mutation"><br>
+        Age: <input type="number" name="age" step = "0.1"><br>
+
+        <label>Gender:</label>
+         <select name="gender" id="genderDropdown">
+            <option value="">Select Gender</option>
+            <option value="male"> Male </option>
+            <option value="female"> Female</option>
+            <option value="non-dna">Non DNA</option>
+        </select><br>
+
+        <input name ="update" type="submit" value="Update">
+        {{ message }}
+    </form>
+    <br>
+    <p id="status"></p>
+
+</body>
+</html>

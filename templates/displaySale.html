@@ -1,0 +1,57 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Listing</title>
+</head>
+<body>
+    <h1>Products for Sale</h1>
+    <table id="product-table">
+        <thead>
+            <tr>
+                <th>Ring Number</th>
+                <th>Specie</th>
+                <th>Mutation</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Price</th>
+                <!-- Add more columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Table rows will be populated dynamically using AJAX -->
+        </tbody>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '/api/bird/sale',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    // Populate the table with data returned from the Flask endpoint
+                    var tableBody = $('#product-table tbody');
+                    data.forEach(function (product) {
+                        tableBody.append(
+                            '<tr>' +
+                            '<td>' + product._id + '</td>' +
+                            '<td>' + product.specie + '</td>' +
+                            '<td>' + product.mutation + '</td>' +
+                            '<td>' + product.age + '</td>' +
+                            '<td>' + product.gender + '</td>' +
+                            '<td>' + product.price + '$'+ '</td>' +
+                            '</tr>'
+                            // Add more cells here if there are more columns in the MongoDB documents
+                        );
+                    });
+                },
+                error: function (error) {
+                    console.log('Error:', error);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

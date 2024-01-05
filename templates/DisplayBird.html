@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+  	<script
+  src="http://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+    <title>Display Bird</title>
+
+</head>
+<body>
+    <button id="display">Display Birds</button>
+    <table id="show" border="2"></table>
+   <a class="btn btn-primary" href="/displayDashboard">Back to Dashboard</a>
+</body>
+<script>
+        var myData
+        $(document.body).on('click',"#display",function () {
+                         $.ajax({type:"GET",
+                                url:"/api/bird",
+                             success: function(result){
+                                        myData = result
+                                 if(myData !=null || myData !=""){
+
+                                    table = $('#show').DataTable( {
+                                        data: myData ,destroy: true,
+                                        columns: [
+                                            { data: "_id" ,title:"Ring Number" },
+                                            {data: "specie" ,title:"Specie" },
+                                            { data: "mutation" ,title:"Mutation" },
+                                            { data: "age" ,title:"Age" },
+                                            { data: "gender" ,title:"Gender" },
+                                        ]
+                                    } );
+                                }
+
+                          }});
+        });
+
+
+    </script>
+</html>
